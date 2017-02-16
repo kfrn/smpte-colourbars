@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SMPTE Colourbars in SVG</title>
+  <link rel="stylesheet" href="./styles/normalize-min.css">
+  <link rel="stylesheet" href="./styles/main.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+
+  <div class="colourbars">
+
+    <div class="sd">
+      <h1>EBU colourbars</h1>
+      <p>768x576 (625-line/PAL video, ‘square-pixel SD’, 4:3 AR)</p>
+      <svg id="ebu-cb"
+          version="1.1"
+          baseProfile="full"
+          width="768" height="576"
+          xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
+
+    <div class="sd">
+      <h1>SMPTE colourbars - SD</h1>
+      <p>768x576 (625-line/PAL video, ‘square-pixel SD’, 4:3 AR)</p>
+      <svg id="smpte-cb"
+          version="1.1"
+          baseProfile="full"
+          width="768" height="576"
+          xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
+
+    <div class="hd">
+      <h1>SMPTE colourbars - HD</h1>
+      <p>1280x720 (HD, 16:9 AR)</p>
+      <svg id="smpte-cb-hd"
+          version="1.1"
+          baseProfile="full"
+          width="1280" height="720"
+          xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
+
+  </div>
+
+  <script src="./scripts/main.js"></script>
+
+</body>
+</html>
