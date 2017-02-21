@@ -8,6 +8,16 @@ function drawEBUColourBars(x, y, width, height) {
       .attr("width", width)
       .attr("height", height)
       .attr("fill", "lightblue")
+
+  d3.range(8).forEach(d => {
+    g.append("rect")
+      .attr("x", x + d * 2 * width / 8)
+      .attr("y", y)
+      .attr("width", width / 8)
+      .attr("height", height)
+      .attr("fill", "rgba(0,0,0,0)")
+      .attr("stroke", "black")
+  })
 }
 
 function drawSMPTEColourBars(x, y, width, height) {
