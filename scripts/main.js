@@ -2,7 +2,9 @@
 
 // General
 const semiBlack = '#1f1f1f'
-const mainColours = {
+const grey15 = '#252525'
+const grey40 = '#656565'
+const mainColours = { // At 75% intensity
   white: 'white',
   yellow: '#c4c400',
   cyan: '#00c4c3',
@@ -107,12 +109,29 @@ function drawHDColourBars (x, y, width, height) {
   const svg = d3.select('#smpte-cb-hd')
   const g = svg.append('g')
 
+  /* Background (also bottom left/right squares) */
   g.append('rect')
       .attr('x', x)
       .attr('y', y)
       .attr('width', width)
       .attr('height', height)
-      .attr('fill', 'dimgrey')
+      .attr('fill', grey15)
+
+  /* Top section - 40% grey background */
+  g.append('rect')
+      .attr('x', x)
+      .attr('y', y)
+      .attr('width', width)
+      .attr('height', height * 0.6)
+      .attr('fill', grey40)
+
+  /* Top section - 40% grey background */
+  g.append('rect')
+      .attr('x', x)
+      .attr('y', y)
+      .attr('width', width)
+      .attr('height', height * 0.6)
+      .attr('fill', grey40)
 }
 
 /* CALL FUNCTIONS */
