@@ -51,13 +51,6 @@ function drawSMPTEColourBars (x, y, width, height) {
   const svg = d3.select('#smpte-cb')
   const g = svg.append('g')
 
-  g.append('rect')
-      .attr('x', x)
-      .attr('y', y)
-      .attr('width', width)
-      .attr('height', height)
-      .attr('fill', semiBlack)
-
   /* Standard EIA 75% amplitude white bars (67% of frame height) */
   d3.range(7).forEach((d, i) => {
     g.append('rect')
@@ -99,7 +92,7 @@ function drawSMPTEColourBars (x, y, width, height) {
       .attr('height', height * 0.25)
       .attr('fill', semiBlack)
 
-  // Right hand side: with black/superblack/light-black central block
+  // Right hand side: black/superblack/light black central block
   d3.range(9).forEach((d, i) => {
     g.append('rect')
         .attr('x', x + (width * (4 / 7)) + (d * (width * (3 / 7)) / 9))
@@ -119,7 +112,7 @@ function drawHDColourBars (x, y, width, height) {
       .attr('y', y)
       .attr('width', width)
       .attr('height', height)
-      .attr('fill', 'lightblue')
+      .attr('fill', 'dimgrey')
 }
 
 /* CALL FUNCTIONS */
