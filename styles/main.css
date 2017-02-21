@@ -1,3 +1,7 @@
 body {
   text-align: center;
 }
+
+svg {
+  border: 2px solid black;
+}
