@@ -125,13 +125,41 @@ function drawHDColourBars (x, y, width, height) {
       .attr('height', height * 0.6)
       .attr('fill', grey40)
 
-  /* Top section - 40% grey background */
+  /* Top section - middle colour bars */
+  d3.range(7).forEach((d, i) => {
+    const barWidth = 0.75 / 7
+    g.append('rect')
+        .attr('x', x + (width * 0.125) + (d * (width * 0.75) / 7))
+        .attr('y', y)
+        .attr('width', (width * 0.75) / 7)
+        .attr('height', height * 0.6)
+        .attr('fill', SMPTEcolours[i])
+  })
+
+  /* Middle - top ribbon */
   g.append('rect')
-      .attr('x', x)
-      .attr('y', y)
-      .attr('width', width)
-      .attr('height', height * 0.6)
-      .attr('fill', grey40)
+  .attr('x', x)
+  .attr('y', y + (height * 0.6))
+  .attr('width', width)
+  .attr('height', height * 0.1)
+  .attr('fill', 'purple')
+
+  /* Middle - bottom ribbon */
+  g.append('rect')
+  .attr('x', x)
+  .attr('y', y + (height * 0.7))
+  .attr('width', width)
+  .attr('height', height * 0.1)
+  .attr('fill', 'blue')
+
+  /* Bottom section */
+  g.append('rect')
+  .attr('x', x)
+  .attr('y', y + (height * 0.8))
+  .attr('width', width)
+  .attr('height', height * 0.2)
+  .attr('fill', 'lightgrey')
+
 }
 
 /* CALL FUNCTIONS */
