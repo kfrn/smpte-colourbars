@@ -16,6 +16,8 @@ const colourValues = Object.keys(mainColours).map(key => mainColours[key])
 const SMPTEcolours = colourValues.slice()
 SMPTEcolours[0] = "lightgrey"
 
+const reverseBlueBars = [mainColours.blue, "black", mainColours.magenta, "black", mainColours.cyan, "black", "lightgrey"]
+
 
 /* FUNCTIONS */
 
@@ -53,22 +55,24 @@ function drawSMPTEColourBars(x, y, width, height) {
       .attr("fill", "lightblue")
 
   // Standard EIA 75% amplitude white bars (67% of frame height)
-  d3.range(8).forEach((d, i) => {
+  d3.range(7).forEach((d, i) => {
     g.append("rect")
-    .attr("x", x + d * width / 8)
+    .attr("x", x + d * width / 7)
     .attr("y", y)
-    .attr("width", width / 8)
+    .attr("width", width / 7)
     .attr("height", height * 0.67)
     .attr("fill", SMPTEcolours[i])
   })
 
   // Reverse blue bars (8% of frame height)
-  g.append("rect")
-      .attr("x", x)
-      .attr("y", y + height * 0.67)
-      .attr("width", width)
-      .attr("height", height * 0.08)
-      .attr("fill", "blue")
+  d3.range(7).forEach((d, i) => {
+    g.append("rect")
+    .attr("x", x + d * width / 7)
+    .attr("y", y + height * 0.67)
+    .attr("width", width / 7)
+    .attr("height", height * 0.08)
+    .attr("fill", reverseBlueBars[i])
+  })
 
   // PLUGE signal (25% of frame height)
   g.append("rect")
