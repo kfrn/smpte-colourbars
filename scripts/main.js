@@ -22,7 +22,7 @@ const reverseBlueBars = [mainColours.blue, semiBlack, mainColours.magenta, semiB
 
 const PLUGEcoloursLeft = ["#003d67", "white", "#3d0076"]
 
-const PLUGEright = [Array(4).fill(semiBlack), "black", semiBlack, "#313131", Array(3).fill(semiBlack)]
+const PLUGEright = [Array(3).fill(semiBlack), "black", semiBlack, "#313131", Array(3).fill(semiBlack)]
 
 const PLUGEcoloursRight = [].concat(...PLUGEright)
 
@@ -60,7 +60,7 @@ function drawSMPTEColourBars(x, y, width, height) {
       .attr("y", y)
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", "lightblue")
+      .attr("fill", semiBlack)
 
   // Standard EIA 75% amplitude white bars (67% of frame height)
   d3.range(7).forEach((d, i) => {
@@ -108,12 +108,11 @@ function drawSMPTEColourBars(x, y, width, height) {
     console.log(rightBlockWidth);
     d3.range(9).forEach((d, i) => {
       g.append("rect")
-        .attr("x", x + (width * 4 / 7))
+        .attr("x", x + (width * (4 / 7)) + (d * (width * (3 / 7)) / 9))
         .attr("y", y + height * 0.75)
-        .attr("width", (3 / 7 * width) ) // divide by 9?
+        .attr("width", (width * 3 / 7) / 9 ) // divide by 9?
         .attr("height", height * 0.25)
-        // .attr("fill", PLUGEcoloursRight[i])
-        .attr("fill", "purple")
+        .attr("fill", PLUGEcoloursRight[i])
     })
 }
 
