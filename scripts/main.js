@@ -13,10 +13,18 @@ const mainColours = {
 
 const colourValues = Object.keys(mainColours).map(key => mainColours[key])
 
-const SMPTEcolours = colourValues.slice()
+const SMPTEcolours = [...colourValues]
 SMPTEcolours[0] = "lightgrey"
 
-const reverseBlueBars = [mainColours.blue, "black", mainColours.magenta, "black", mainColours.cyan, "black", "lightgrey"]
+const semiBlack = "#1f1f1f"
+
+const reverseBlueBars = [mainColours.blue, semiBlack, mainColours.magenta, semiBlack, mainColours.cyan, semiBlack, "lightgrey"]
+
+const PLUGEcoloursLeft = ["#003d67", "white", "#3d0076"]
+
+const PLUGEright = [Array(4).fill(semiBlack), "black", semiBlack, "#313131", Array(3).fill(semiBlack)]
+
+const PLUGEcoloursRight = [].concat(...PLUGEright)
 
 
 /* FUNCTIONS */
@@ -57,30 +65,56 @@ function drawSMPTEColourBars(x, y, width, height) {
   // Standard EIA 75% amplitude white bars (67% of frame height)
   d3.range(7).forEach((d, i) => {
     g.append("rect")
-    .attr("x", x + d * width / 7)
-    .attr("y", y)
-    .attr("width", width / 7)
-    .attr("height", height * 0.67)
-    .attr("fill", SMPTEcolours[i])
+      .attr("x", x + d * width / 7)
+      .attr("y", y)
+      .attr("width", width / 7)
+      .attr("height", height * 0.67)
+      .attr("fill", SMPTEcolours[i])
   })
 
   // Reverse blue bars (8% of frame height)
   d3.range(7).forEach((d, i) => {
     g.append("rect")
-    .attr("x", x + d * width / 7)
-    .attr("y", y + height * 0.67)
-    .attr("width", width / 7)
-    .attr("height", height * 0.08)
-    .attr("fill", reverseBlueBars[i])
+      .attr("x", x + d * width / 7)
+      .attr("y", y + height * 0.67)
+      .attr("width", width / 7)
+      .attr("height", height * 0.08)
+      .attr("fill", reverseBlueBars[i])
   })
 
   // PLUGE signal (25% of frame height)
-  g.append("rect")
-      .attr("x", x)
-      .attr("y", y + height * 0.75)
-      .attr("width", width)
+
+    // Left hand side: blue, white, purple
+    d3.range(3).forEach((d, i) => {
+      g.append("rect")
+        .attr("x", x + d * ((width / 3) * 0.5 ))
+        .attr("y", y + height * 0.75)
+        .attr("width", (width / 3) * 0.5)
+        .attr("height", height * 0.25)
+        .attr("fill", PLUGEcoloursLeft[i])
+    })
+
+    // Middle black block
+    const middleBlockWidth = 1 - 0.5 - (3 / 7)
+    g.append("rect")
+      .attr("x", x + (0.5 * width))
+      .attr("y", y + (height * 0.75))
+      .attr("width", width * middleBlockWidth)
       .attr("height", height * 0.25)
-      .attr("fill", "black")
+      .attr("fill", semiBlack)
+
+    // Right hand side: black, superblack, light black
+    const rightBlockWidth = 1 - (4 / 7)
+    console.log(rightBlockWidth);
+    d3.range(9).forEach((d, i) => {
+      g.append("rect")
+        .attr("x", x + (width * 4 / 7))
+        .attr("y", y + height * 0.75)
+        .attr("width", (3 / 7 * width) ) // divide by 9?
+        .attr("height", height * 0.25)
+        // .attr("fill", PLUGEcoloursRight[i])
+        .attr("fill", "purple")
+    })
 }
 
 
