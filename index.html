@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SMPTE Colourbars in SVG</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/normalize-min.css">
+  <link rel="stylesheet" href="./styles/main.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+
+  <div class="colourbars">
+
+    <div class="heading">
+      <h1>Drawing video colour bars with D3.js</h1>
+    </div>
+
+    <div class="sd">
+      <h2>EBU colourbars</h2>
+      <p>768x576 (625-line/PAL video, ‘square-pixel SD’, 4:3 AR)</p>
+      <svg id="ebu-cb"
+          version="1.1"
+          baseProfile="full"
+          width="768" height="576"
+          xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
+
+    <div class="sd">
+      <h2>SMPTE colourbars - SD</h2>
+      <p>768x576 (625-line/PAL video, ‘square-pixel SD’, 4:3 AR)</p>
+      <svg id="smpte-cb"
+          version="1.1"
+          baseProfile="full"
+          width="768" height="576"
+          shape-rendering="crispEdges"
+          xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
+
+    <div class="hd">
+      <h2>SMPTE colourbars - HD</h2>
+      <p>1280x720 (HD, 16:9 AR)</p>
+      <svg id="smpte-cb-hd"
+          version="1.1"
+          baseProfile="full"
+          width="1280" height="720"
+          shape-rendering="crispEdges"
+          xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
+
+  </div>
+
+  <script src="./scripts/main.js"></script>
+
+</body>
+</html>
