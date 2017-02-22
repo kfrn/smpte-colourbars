@@ -4,8 +4,7 @@
 
 #### Summary
 
-The EBU and SMPTE colourbars constructed in SVG with D3.js.
-<!-- See the result here! -->
+The EBU and SMPTE colourbars constructed in SVG with D3.js. See the result [here](https://kfrn.github.io/smpte-colourbars/)!
 
 #### Notes
 

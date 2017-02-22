@@ -1,7 +1,12 @@
 body {
   text-align: center;
+  font-family: 'Lato', sans-serif;
 }
 
 svg {
   border: 2px solid black;
+}
+
+div {
+  margin-bottom: 3rem;
 }

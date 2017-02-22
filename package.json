@@ -1,0 +1,24 @@
+{
+  "name": "smpte-colourbars",
+  "version": "1.0.0",
+  "description": "The EBU and SMPTE colourbars constructed in SVG with D3.js.\r <!-- See the result here! -->",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "gh-pages -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kfrn/smpte-colourbars.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kfrn/smpte-colourbars/issues"
+  },
+  "homepage": "https://github.com/kfrn/smpte-colourbars#readme",
+  "devDependencies": {
+    "gh-pages": "^0.12.0"
+  }
+}
