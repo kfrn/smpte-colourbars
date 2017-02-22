@@ -4,6 +4,9 @@
 const semiBlack = '#1f1f1f'
 const grey15 = '#252525'
 const grey40 = '#656565'
+const smpteBlue = '#003d67'
+const smptePurple = '#3d0076'
+
 const mainColours = { // At 75% intensity
   white: 'white',
   yellow: '#c4c400',
@@ -22,9 +25,12 @@ const colourValues = Object.keys(mainColours).map(key => mainColours[key])
 const SMPTEcolours = [...colourValues]
 SMPTEcolours[0] = 'lightgrey'
 const reverseBlueBars = [mainColours.blue, semiBlack, mainColours.magenta, semiBlack, mainColours.cyan, semiBlack, 'lightgrey']
-const PLUGEcoloursLeft = ['#003d67', 'white', '#3d0076']
+const PLUGEcoloursLeft = [smpteBlue, 'white', smptePurple]
 const PLUGEright = [Array(3).fill(semiBlack), 'black', semiBlack, '#313131', Array(3).fill(semiBlack)]
 const PLUGEcoloursRight = [].concat(...PLUGEright)
+const smpteBlacks = ['black', semiBlack, '#343434', semiBlack, '#545454']
+
+const testColours = ['red', 'orange', 'yellow', 'green', 'blue']
 
 /* FUNCTIONS */
 
@@ -136,29 +142,138 @@ function drawHDColourBars (x, y, width, height) {
         .attr('fill', SMPTEcolours[i])
   })
 
-  /* Middle - top ribbon */
+  // /* Middle section - top ribbon - ALL */
+  // g.append('rect')
+  // .attr('x', x)
+  // .attr('y', y + (height * 0.6))
+  // .attr('width', width)
+  // .attr('height', height * 0.1)
+  // .attr('fill', 'black')
+
+  /* Middle section - top ribbon, first block */
   g.append('rect')
   .attr('x', x)
   .attr('y', y + (height * 0.6))
-  .attr('width', width)
+  .attr('width', width * 0.125)
   .attr('height', height * 0.1)
-  .attr('fill', 'purple')
+  .attr('fill', 'cyan')
 
-  /* Middle - bottom ribbon */
+  /* Middle section - top ribbon, second block */
   g.append('rect')
-  .attr('x', x)
-  .attr('y', y + (height * 0.7))
-  .attr('width', width)
+  .attr('x', x + (width * 0.125))
+  .attr('y', y + (height * 0.6))
+  .attr('width', (width * 0.75) / 7)
+  .attr('height', height * 0.1)
+  .attr('fill', smpteBlue)
+
+  /* Middle section - top ribbon, third block (long grey) */
+  g.append('rect')
+  .attr('x', x + (width * 0.125) + ((width * 0.75) / 7))
+  .attr('y', y + (height * 0.6))
+  .attr('width', ((width * 0.75) / 7) * 6)
+  .attr('height', height * 0.1)
+  .attr('fill', 'lightgrey')
+
+  /* Middle section - top ribbon, last block */
+  g.append('rect')
+  .attr('x', x + (width * 0.875))
+  .attr('y', y + (height * 0.6))
+  .attr('width', width * 0.125)
   .attr('height', height * 0.1)
   .attr('fill', 'blue')
 
-  /* Bottom section */
+  // /* Middle - bottom ribbon - ALL */
+  // g.append('rect')
+  // .attr('x', x)
+  // .attr('y', y + (height * 0.7))
+  // .attr('width', width)
+  // .attr('height', height * 0.1)
+  // .attr('fill', 'purple')
+
+  /* Middle - bottom ribbon, first block */
+  g.append('rect')
+  .attr('x', x)
+  .attr('y', y + (height * 0.7))
+  .attr('width', width * 0.125)
+  .attr('height', height * 0.1)
+  .attr('fill', 'yellow')
+
+  /* Middle - bottom ribbon, second block */
+  g.append('rect')
+  .attr('x', x + (width * 0.125))
+  .attr('y', y + (height * 0.7))
+  .attr('width', (width * 0.75) / 7)
+  .attr('height', height * 0.1)
+  .attr('fill', smptePurple)
+
+  /* Middle - bottom ribbon, third block (gradient) */
+  g.append('rect')
+  .attr('x', x + (width * 0.125) + ((width * 0.75) / 7))
+  .attr('y', y + (height * 0.7))
+  .attr('width', ((width * 0.75) / 7) * 6)
+  .attr('height', height * 0.1)
+  .attr('fill', 'darkgrey')
+
+  /* Middle - bottom ribbon, last block */
+  g.append('rect')
+  .attr('x', x + (width * 0.875))
+  .attr('y', y + (height * 0.7))
+  .attr('width', width * 0.125)
+  .attr('height', height * 0.1)
+  .attr('fill', 'red')
+
+  /* Bottom section - dark grey background (corner squares) */
   g.append('rect')
   .attr('x', x)
   .attr('y', y + (height * 0.8))
   .attr('width', width)
   .attr('height', height * 0.2)
-  .attr('fill', 'lightgrey')
+  .attr('fill', grey15)
+  // .attr('fill', 'purple')
+
+  /* Bottom section - first black patch */
+  g.append('rect')
+  .attr('x', x + (width * 0.125))
+  .attr('y', y + (height * 0.8))
+  .attr('width', ((width * 0.75) / 7) * 1.5)
+  .attr('height', height * 0.2)
+  .attr('fill', semiBlack)
+
+  /* Bottom section - white patch */
+  g.append('rect')
+  .attr('x', x + (width * 0.125) + ((width * 0.75) / 7) * 1.5)
+  .attr('y', y + (height * 0.8))
+  .attr('width', ((width * 0.75) / 7) * 2)
+  .attr('height', height * 0.2)
+  .attr('fill', 'white')
+
+  /* Bottom section - second black patch */
+  g.append('rect')
+  .attr('x', x + (width * 0.125) + ((width * 0.75) / 7) * 3.5)
+  .attr('y', y + (height * 0.8))
+  .attr('width', (width * 0.75) / 7)
+  .attr('height', height * 0.2)
+  .attr('fill', semiBlack)
+
+  /* Bottom section - five different blacks */
+  d3.range(5).forEach((d, i) => {
+    const xAxisStart = (width * 0.125) + (((width * 0.75) / 7) * 4.5)
+    g.append('rect')
+      .attr('x', x + xAxisStart)
+      .attr('y', y + (height * 0.8))
+      .attr('width', ((width * 0.75) / 7) * 1.5)
+      .attr('height', height * 0.2)
+      .attr('fill', 'purple')
+      // .attr('fill', testColours[i])
+  })
+
+  /* Bottom section - third & last black patch */
+  g.append('rect')
+  .attr('x', x + (width * 0.125) + ((width * 0.75) / 7) * 6)
+  .attr('y', y + (height * 0.8))
+  .attr('width', (width * 0.75) / 7)
+  .attr('height', height * 0.2)
+  .attr('fill', semiBlack)
 
 }
 
