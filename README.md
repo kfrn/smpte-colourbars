@@ -11,9 +11,9 @@ Constructed from specs given in [this document](http://www.xilinx.com/support/do
 
 * **HD colourbars** based on SMPTE RP 219-2002 ([IEEE link](http://ieeexplore.ieee.org/document/7289865/)).  
 Based on ffmpeg's SMPTE HD colourbars and the diagram in [this document](http://uglyduck.ath.cx/PDF/Xilinx/Spartan3/appnotes/xapp682.pdf) (page 5, figure 3).  
-Proportions approximate, as buying the spec from the IEEE is USD 120, and I couldn't find public information.
+Proportions approximate, I couldn't find public information on this, and buying the spec from the IEEE is USD 120.
 
-* **Not 100% colour-accurate**: primaries and secondaries (at 75% intensity) are decent, but blacks are fudged to be able to readily see the contrast between the different black levels.
+* **Not really colour-accurate**: most colours are relatively accurate (via ffmpeg's test patterns), but blacks are fudged to be able to readily see the contrast between the different levels.
 
 * **Reference images** [here](https://github.com/kfrn/smpte-colourbars/tree/master/reference-images).
 

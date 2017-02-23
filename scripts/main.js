@@ -125,150 +125,156 @@ function drawHDColourBars (x, y, width, height) {
       .attr('height', height)
       .attr('fill', grey15)
 
-  /* Top section - 40% grey background = grey sidebars in top section) */
-  g.append('rect')
-      .attr('x', x)
-      .attr('y', y)
-      .attr('width', width)
-      .attr('height', height * 0.6)
-      .attr('fill', grey40)
+  /* TOP SECTION - 60% of HEIGHT */
 
-  /* Top section - middle colour bars */
-  d3.range(7).forEach((d, i) => {
+    // 40% grey background ()= grey sidebars in top section)
     g.append('rect')
-        .attr('x', x + cornerBlock + (d * barWidth))
+        .attr('x', x)
         .attr('y', y)
-        .attr('width', barWidth)
+        .attr('width', width)
         .attr('height', height * 0.6)
-        .attr('fill', smpteColours[i])
-  })
+        .attr('fill', grey40)
 
-  /* Middle section - top ribbon, first block */
-  g.append('rect')
-  .attr('x', x)
-  .attr('y', y + (height * 0.6))
-  .attr('width', cornerBlock)
-  .attr('height', height * 0.1)
-  .attr('fill', 'cyan')
+    // Middle colour bars
+    d3.range(7).forEach((d, i) => {
+      g.append('rect')
+          .attr('x', x + cornerBlock + (d * barWidth))
+          .attr('y', y)
+          .attr('width', barWidth)
+          .attr('height', height * 0.6)
+          .attr('fill', smpteColours[i])
+    })
 
-  /* Middle section - top ribbon, second block */
-  g.append('rect')
-  .attr('x', x + cornerBlock)
-  .attr('y', y + (height * 0.6))
-  .attr('width', barWidth)
-  .attr('height', height * 0.1)
-  .attr('fill', smpteBlue)
+  /* MIDDLE SECTION - 20% of HEIGHT. L-R */
 
-  /* Middle section - top ribbon, third block (long grey) */
-  g.append('rect')
-  .attr('x', x + cornerBlock + barWidth)
-  .attr('y', y + (height * 0.6))
-  .attr('width', barWidth * 6)
-  .attr('height', height * 0.1)
-  .attr('fill', 'lightgrey')
-
-  /* Middle section - top ribbon, last block */
-  g.append('rect')
-  .attr('x', x + (width * 0.875))
-  .attr('y', y + (height * 0.6))
-  .attr('width', cornerBlock)
-  .attr('height', height * 0.1)
-  .attr('fill', 'blue')
-
-  /* Middle - bottom ribbon, first block */
-  g.append('rect')
-  .attr('x', x)
-  .attr('y', y + (height * 0.7))
-  .attr('width', cornerBlock)
-  .attr('height', height * 0.1)
-  .attr('fill', 'yellow')
-
-  /* Middle - bottom ribbon, second block */
-  g.append('rect')
-  .attr('x', x + cornerBlock)
-  .attr('y', y + (height * 0.7))
-  .attr('width', barWidth)
-  .attr('height', height * 0.1)
-  .attr('fill', smptePurple)
-
-  /* Middle - bottom ribbon, third block (gradient) */
-
-  g.append('rect')
-  .attr('x', x + cornerBlock + barWidth)
-  .attr('y', y + (height * 0.7))
-  .attr('width', barWidth * 6)
-  .attr('height', height * 0.1)
-  .attr('fill', 'url(#svgGradient)')
-
-  var gradient = g.append('linearGradient')
-   .attr('id', 'svgGradient')
-   .attr('x1', '0')
-   .attr('x2', '1')
-   .attr('y1', '0')
-   .attr('y2', '0')
-
-  gradient.append('stop')
-    .attr('offset', '0%')
-    .attr('stop-color', 'black')
-    .attr('stop-opacity', 1)
-
-  gradient.append('stop')
-      .attr('offset', '100%')
-      .attr('stop-color', 'white')
-      .attr('stop-opacity', 1)
-
-  /* Middle - bottom ribbon, last block */
-  g.append('rect')
-  .attr('x', x + (width * 0.875))
-  .attr('y', y + (height * 0.7))
-  .attr('width', cornerBlock)
-  .attr('height', height * 0.1)
-  .attr('fill', 'red')
-
-  /* Bottom section - first black patch */
-  g.append('rect')
-  .attr('x', x + cornerBlock)
-  .attr('y', y + (height * 0.8))
-  .attr('width', barWidth * 1.5)
-  .attr('height', height * 0.2)
-  .attr('fill', semiBlack)
-
-  /* Bottom section - white patch */
-  g.append('rect')
-  .attr('x', x + cornerBlock + barWidth * 1.5)
-  .attr('y', y + (height * 0.8))
-  .attr('width', barWidth * 2)
-  .attr('height', height * 0.2)
-  .attr('fill', 'white')
-
-  /* Bottom section - second black patch */
-  g.append('rect')
-  .attr('x', x + cornerBlock + barWidth * 3.5)
-  .attr('y', y + (height * 0.8))
-  .attr('width', barWidth)
-  .attr('height', height * 0.2)
-  .attr('fill', semiBlack)
-
-  /* Bottom section - sequence of five black bars */
-  d3.range(5).forEach((d, i) => {
-    const smpteBlacks = ['black', semiBlack, '#2f2f2f', semiBlack, '#343434']
-    const middleSectionWidth = (width * 0.75)
-    const middleLeftBlock = (middleSectionWidth / 7) * 4.5
+    // Top ribbon, first block
     g.append('rect')
-      .attr('x', x + cornerBlock + middleLeftBlock + d * (barWidth * 1.5) / 5)
-      .attr('y', y + (height * 0.8))
-      .attr('width', (barWidth * 1.5) / 5)
-      .attr('height', height * 0.2)
-      .attr('fill', smpteBlacks[i])
-  })
+    .attr('x', x)
+    .attr('y', y + (height * 0.6))
+    .attr('width', cornerBlock)
+    .attr('height', height * 0.1)
+    .attr('fill', 'cyan')
 
-  /* Bottom section - third & last black patch */
-  g.append('rect')
-  .attr('x', x + (width * 0.125) + barWidth * 6)
-  .attr('y', y + (height * 0.8))
-  .attr('width', barWidth)
-  .attr('height', height * 0.2)
-  .attr('fill', semiBlack)
+    // Top ribbon, second block
+    g.append('rect')
+    .attr('x', x + cornerBlock)
+    .attr('y', y + (height * 0.6))
+    .attr('width', barWidth)
+    .attr('height', height * 0.1)
+    .attr('fill', smpteBlue)
+
+    // Top ribbon, third block (long grey)
+    g.append('rect')
+    .attr('x', x + cornerBlock + barWidth)
+    .attr('y', y + (height * 0.6))
+    .attr('width', barWidth * 6)
+    .attr('height', height * 0.1)
+    .attr('fill', 'lightgrey')
+
+    // Top ribbon, last block
+    g.append('rect')
+    .attr('x', x + (width * 0.875))
+    .attr('y', y + (height * 0.6))
+    .attr('width', cornerBlock)
+    .attr('height', height * 0.1)
+    .attr('fill', 'blue')
+
+    // Bottom ribbon, first block
+    g.append('rect')
+    .attr('x', x)
+    .attr('y', y + (height * 0.7))
+    .attr('width', cornerBlock)
+    .attr('height', height * 0.1)
+    .attr('fill', 'yellow')
+
+    // Bottom ribbon, second block
+    g.append('rect')
+    .attr('x', x + cornerBlock)
+    .attr('y', y + (height * 0.7))
+    .attr('width', barWidth)
+    .attr('height', height * 0.1)
+    .attr('fill', smptePurple)
+
+    // Bottom ribbon, third block (gradient)
+
+      g.append('rect')
+      .attr('x', x + cornerBlock + barWidth)
+      .attr('y', y + (height * 0.7))
+      .attr('width', barWidth * 6)
+      .attr('height', height * 0.1)
+      .attr('fill', 'url(#svgGradient)')
+
+      var gradient = g.append('linearGradient')
+       .attr('id', 'svgGradient')
+       .attr('x1', '0')
+       .attr('x2', '1')
+       .attr('y1', '0')
+       .attr('y2', '0')
+
+      gradient.append('stop')
+        .attr('offset', '0%')
+        .attr('stop-color', 'black')
+        .attr('stop-opacity', 1)
+
+      gradient.append('stop')
+          .attr('offset', '100%')
+          .attr('stop-color', 'white')
+          .attr('stop-opacity', 1)
+
+    // Bottom ribbon, last block
+    g.append('rect')
+    .attr('x', x + (width * 0.875))
+    .attr('y', y + (height * 0.7))
+    .attr('width', cornerBlock)
+    .attr('height', height * 0.1)
+    .attr('fill', 'red')
+
+  /* BOTTOM SECTION - 20% of HEIGHT. L-R */
+
+    // First black patch
+    g.append('rect')
+    .attr('x', x + cornerBlock)
+    .attr('y', y + (height * 0.8))
+    .attr('width', barWidth * 1.5)
+    .attr('height', height * 0.2)
+    .attr('fill', semiBlack)
+
+    // White patch
+    g.append('rect')
+    .attr('x', x + cornerBlock + barWidth * 1.5)
+    .attr('y', y + (height * 0.8))
+    .attr('width', barWidth * 2)
+    .attr('height', height * 0.2)
+    .attr('fill', 'white')
+
+    // Second black patch
+    g.append('rect')
+    .attr('x', x + cornerBlock + barWidth * 3.5)
+    .attr('y', y + (height * 0.8))
+    .attr('width', barWidth)
+    .attr('height', height * 0.2)
+    .attr('fill', semiBlack)
+
+    // Sequence of five black bars
+    d3.range(5).forEach((d, i) => {
+      const smpteBlacks = ['black', semiBlack, '#2f2f2f', semiBlack, '#343434']
+      const middleSectionWidth = (width * 0.75)
+      const middleLeftBlock = (middleSectionWidth / 7) * 4.5
+      g.append('rect')
+        .attr('x', x + cornerBlock + middleLeftBlock + d * (barWidth * 1.5) / 5)
+        .attr('y', y + (height * 0.8))
+        .attr('width', (barWidth * 1.5) / 5)
+        .attr('height', height * 0.2)
+        .attr('fill', smpteBlacks[i])
+    })
+
+    // Third & last black patch
+    g.append('rect')
+    .attr('x', x + (width * 0.125) + barWidth * 6)
+    .attr('y', y + (height * 0.8))
+    .attr('width', barWidth)
+    .attr('height', height * 0.2)
+    .attr('fill', semiBlack)
 }
 
 /* CALL FUNCTIONS */
