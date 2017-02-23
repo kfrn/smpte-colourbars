@@ -8,16 +8,21 @@ svg {
   margin: 0 auto;
 }
 
-div {
-  margin-bottom: 3rem;
-  /*text-align: center;*/
+div.heading, div.sd, div.hd {
+  margin-bottom: 2.5rem;
 }
 
-/*@media only screen and (min-width: 750px) {
+h1, h2, p {
+  padding: 0 1rem;
+}
+
+@media only screen and (min-width: 750px) {
   .sd {
     max-width: 768px;
+    margin: auto;
   }
   .hd {
     max-width: 1280px;
+    margin: auto;
   }
-}*/
+}
