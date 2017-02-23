@@ -8,7 +8,7 @@ svg {
   margin: 0 auto;
 }
 
-div.heading, div.sd, div.hd {
+div.heading, div.sd, div.hd, div.sourcecode {
   margin-bottom: 2.5rem;
 }
 
