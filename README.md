@@ -1,5 +1,3 @@
-# ⚠ work in progress ⚠
-
 ## Video test patterns (colour bars)
 
 #### Summary
@@ -15,9 +13,9 @@ Constructed from specs given in [this document](http://www.xilinx.com/support/do
 Based on ffmpeg's SMPTE HD colourbars and the diagram in [this document](http://uglyduck.ath.cx/PDF/Xilinx/Spartan3/appnotes/xapp682.pdf) (page 5, figure 3).  
 Proportions approximate, as buying the spec from the IEEE is USD 120, and I couldn't find public information.
 
-* Reasonably colour-accurate (primaries and secondaries at 75% intensity), except for blacks, which are fudged to be able to readily see the contrast between the different black levels.
+* **Not 100% colour-accurate**: primaries and secondaries (at 75% intensity) are decent, but blacks are fudged to be able to readily see the contrast between the different black levels.
 
-* Reference images [here](https://github.com/kfrn/smpte-colourbars/tree/master/reference-images).
+* **Reference images** [here](https://github.com/kfrn/smpte-colourbars/tree/master/reference-images).
 
 ##### FFmpeg commands to generate colour bars:  
 
