@@ -81,35 +81,36 @@ function drawSMPTEColourBars (x, y, width, height) {
   const PLUGEright = [Array(3).fill(semiBlack), 'black', semiBlack, '#313131', Array(3).fill(semiBlack)]
   const PLUGEcoloursRight = [].concat(...PLUGEright)
 
-  // Left hand side: blue, white, purple
-  d3.range(3).forEach((d, i) => {
-    g.append('rect')
-        .attr('x', x + d * bar6)
-        .attr('y', y + height * 0.75)
-        .attr('width', bar6)
-        .attr('height', height * 0.25)
-        .attr('fill', PLUGEcoloursLeft[i])
-  })
+    // Left hand side: blue, white, purple
+    d3.range(3).forEach((d, i) => {
+      g.append('rect')
+          .attr('x', x + d * bar6)
+          .attr('y', y + height * 0.75)
+          .attr('width', bar6)
+          .attr('height', height * 0.25)
+          .attr('fill', PLUGEcoloursLeft[i])
+    })
 
-  // Middle black block (thin)
-  const middleBlockWidth = 0.5 - (3 / 7)
-  g.append('rect')
-      .attr('x', x + (0.5 * width))
-      .attr('y', y + (height * 0.75))
-      .attr('width', width * middleBlockWidth)
-      .attr('height', height * 0.25)
-      .attr('fill', semiBlack)
-
-  // Right hand side: black/superblack/light black central block
-  d3.range(9).forEach((d, i) => {
+    // Middle black block (thin)
+    const middleBlockWidth = 0.5 - (3 / 7)
     g.append('rect')
-        .attr('x', x + (width * (4 / 7)) + (d * (width * (3 / 7)) / 9))
-        .attr('y', y + height * 0.75)
-        .attr('width', (bar7 * 3) / 9)
+        .attr('x', x + (0.5 * width))
+        .attr('y', y + (height * 0.75))
+        .attr('width', width * middleBlockWidth)
         .attr('height', height * 0.25)
-        .attr('fill', PLUGEcoloursRight[i])
+        .attr('fill', semiBlack)
+
+    // Right hand side: black/superblack/light black central block
+    d3.range(9).forEach((d, i) => {
+      g.append('rect')
+          .attr('x', x + (width * (4 / 7)) + (d * (width * (3 / 7)) / 9))
+          .attr('y', y + height * 0.75)
+          .attr('width', (bar7 * 3) / 9)
+          .attr('height', height * 0.25)
+          .attr('fill', PLUGEcoloursRight[i])
   })
 }
+
 
 function drawFFmpegTestsrc(x, y, width, height) {
   console.log("test")
@@ -129,11 +130,22 @@ function drawFFmpegTestsrc(x, y, width, height) {
   })
 
   /* Circle */
+
+  g.append('pattern')
+      .attr('id', 'hash')
+      .attr('patternUnits', 'userSpaceOnUse')
+      .attr('width', 4)
+      .attr('height', 4)
+    .append('path')
+      .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
+      .attr('stroke', '#000000')
+      .attr('stroke-width', 1);
+
   g.append("circle")
       .attr("r", height / 1.78)
       .attr("cx", width / 2)
       .attr("cy", height / 2)
-      .style("fill", "lightblue")
+      .style("fill", "url(#hash)")
       .style("opacity", 0.5)
 
   /* Rainbow bar */
@@ -165,14 +177,31 @@ function drawFFmpegTestsrc(x, y, width, height) {
       .attr('height', height * 0.125)
       .attr('fill', 'url(#testsrcGrad)')
 
-  /* Black countdown square */
-  // Basic only - needs tweaking and placement adjustment
-  g.append('rect')
-      .attr('x', barWidth * 6)
-      .attr('y', height * 0.4)
-      .attr('width', barWidth * 0.8)
-      .attr('height', height * 0.2)
-      .attr('fill', 'black')
+  /* Black counting square */
+
+    // Black background
+    g.append('rect')
+        .attr('x', width * 0.8)
+        .attr('y', height * 0.4)
+        .attr('width', barWidth * 0.7)
+        .attr('height', height * 0.2)
+        .attr('fill', 'black')
+
+    // Top of '1'
+    g.append('rect')
+        .attr('x', (width * 0.8) + (barWidth * 0.6))
+        .attr('y', (height * 0.4) + (height * 0.02))
+        .attr('width', barWidth * 0.1)
+        .attr('height', height * 0.07)
+        .attr('fill', 'white')
+
+    // Bottom of '1'
+    g.append('rect')
+        .attr('x', (width * 0.8) + (barWidth * 0.6))
+        .attr('y', (height * 0.5) + (height * 0.01))
+        .attr('width', barWidth * 0.1)
+        .attr('height', height * 0.07)
+        .attr('fill', 'white')
 }
 
 
