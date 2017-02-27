@@ -117,6 +117,7 @@ function drawFFmpegTestsrc(x, y, width, height) {
   const g = svg.append('g')
   const barWidth = width / 8
   const testsrcColours = ['black', 'red', 'lawngreen', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+  const gradientColours = ['lawngreen', 'cyan', 'blue', 'magenta', 'red', 'yellow']
 
   /* Background stripes */
   d3.range(8).forEach((d, i) => {
@@ -128,13 +129,91 @@ function drawFFmpegTestsrc(x, y, width, height) {
         .attr('fill', testsrcColours[i])
   })
 
+  /* Circle */
+  g.append("circle")
+      .attr("r", height / 1.78)
+      .attr("cx", width / 2)
+      .attr("cy", height / 2)
+      .style("fill", "lightblue")
+      .style("opacity", 0.5)
+
+
   /* Rainbow bar */
-  g.append('rect')
+  var gradient = g.append('linearGradient')
+     .attr('id', 'testsrcGrad')
+     .attr('x1', '0')
+     .attr('x2', '1')
+     .attr('y1', '0')
+     .attr('y2', '0')
+
+    // TODO: Needs refactor!!!!!
+    gradient.append('stop')
+      .attr('offset', '0%')
+      .attr('stop-color', 'lawngreen')
+      .attr('stop-opacity', 1)
+
+    gradient.append('stop')
+      .attr('offset', '17%')
+      .attr('stop-color', 'cyan')
+      .attr('stop-opacity', 1)
+
+    gradient.append('stop')
+      .attr('offset', '33%')
+      .attr('stop-color', 'blue')
+      .attr('stop-opacity', 1)
+
+    gradient.append('stop')
+      .attr('offset', '50%')
+      .attr('stop-color', 'magenta')
+      .attr('stop-opacity', 1)
+
+    gradient.append('stop')
+      .attr('offset', '66%')
+      .attr('stop-color', 'red')
+      .attr('stop-opacity', 1)
+
+    gradient.append('stop')
+      .attr('offset', '83%')
+      .attr('stop-color', 'yellow')
+      .attr('stop-opacity', 1)
+
+    gradient.append('stop')
+        .attr('offset', '100%')
+        .attr('stop-color', 'lawngreen')
+        .attr('stop-opacity', 1)
+
+    g.append('rect')
       .attr('x', x)
       .attr('y', y + (height * 0.75))
       .attr('width', width)
       .attr('height', height * 0.125)
-      .attr('fill', grey40)
+      .attr('fill', 'url(#testsrcGrad)')
+
+
+
+      // const gradient = g.append('linearGradient')
+      //  .attr('id', 'testsrcGradient')
+      //  .attr('x1', '0')
+      //  .attr('x2', '1')
+      //  .attr('y1', '0')
+      //  .attr('y2', '0')
+      //
+      // gradient.selectAll('stop')
+      //  .data(gradientColours)
+      //  .enter()
+      //  .append('stop')
+      //  .style('stop-color', function(d){ return d })
+      //  .attr('offset', function(d,i){
+      //    return 100 * (i / (colors.length - 1)) + '%';
+      //  })
+
+  /* Rainbow bar (currently just grey bar) */
+  // g.append('rect')
+  //     .attr('x', x)
+  //     .attr('y', y + (height * 0.75))
+  //     .attr('width', width)
+  //     .attr('height', height * 0.125)
+  //     .attr('fill', grey40)
 }
 
 
@@ -224,15 +303,8 @@ function drawHDColourBars (x, y, width, height) {
 
     // Bottom ribbon, third block (gradient)
 
-      g.append('rect')
-      .attr('x', x + cornerBlock + barWidth)
-      .attr('y', y + (height * 0.7))
-      .attr('width', barWidth * 6)
-      .attr('height', height * 0.1)
-      .attr('fill', 'url(#svgGradient)')
-
       var gradient = g.append('linearGradient')
-       .attr('id', 'svgGradient')
+       .attr('id', 'hdGradient')
        .attr('x1', '0')
        .attr('x2', '1')
        .attr('y1', '0')
@@ -247,6 +319,13 @@ function drawHDColourBars (x, y, width, height) {
           .attr('offset', '100%')
           .attr('stop-color', 'white')
           .attr('stop-opacity', 1)
+
+          g.append('rect')
+          .attr('x', x + cornerBlock + barWidth)
+          .attr('y', y + (height * 0.7))
+          .attr('width', barWidth * 6)
+          .attr('height', height * 0.1)
+          .attr('fill', 'url(#hdGradient)')
 
     // Bottom ribbon, last block
     g.append('rect')
