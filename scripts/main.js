@@ -111,6 +111,33 @@ function drawSMPTEColourBars (x, y, width, height) {
   })
 }
 
+function drawFFmpegTestsrc(x, y, width, height) {
+  console.log("test")
+  const svg = d3.select('#testsrc')
+  const g = svg.append('g')
+  const barWidth = width / 8
+  const testsrcColours = ['black', 'red', 'lawngreen', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+
+  /* Background stripes */
+  d3.range(8).forEach((d, i) => {
+    g.append('rect')
+        .attr('x', x + (d * barWidth))
+        .attr('y', y)
+        .attr('width', barWidth)
+        .attr('height', height)
+        .attr('fill', testsrcColours[i])
+  })
+
+  /* Rainbow bar */
+  g.append('rect')
+      .attr('x', x)
+      .attr('y', y + (height * 0.75))
+      .attr('width', width)
+      .attr('height', height * 0.125)
+      .attr('fill', grey40)
+}
+
+
 function drawHDColourBars (x, y, width, height) {
   const svg = d3.select('#smpte-cb-hd')
   const g = svg.append('g')
@@ -282,3 +309,4 @@ function drawHDColourBars (x, y, width, height) {
 drawEBUColourBars(0, 0, 768, 576)
 drawSMPTEColourBars(0, 0, 768, 576)
 drawHDColourBars(0, 0, 1280, 720)
+drawFFmpegTestsrc(0, 0, 720, 576)

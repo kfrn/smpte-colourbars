@@ -20,7 +20,7 @@ Based on ffmpeg's SMPTE HD colourbars and the diagram in [this document](http://
 
 #### Notes
 
-* **Not really colour-accurate**: most colours are relatively accurate (via ffmpeg's test patterns), but blacks are fudged to be able to readily see the contrast between the different levels.
+* **Not really colour-accurate**: most colours are taken from ffmpeg's test patterns, but blacks are fudged to be able to readily see the contrast between the different levels.
 
 * **Reference images** are located [here](https://github.com/kfrn/smpte-colourbars/tree/master/reference-images).
 
