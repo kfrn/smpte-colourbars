@@ -117,7 +117,6 @@ function drawFFmpegTestsrc(x, y, width, height) {
   const g = svg.append('g')
   const barWidth = width / 8
   const testsrcColours = ['black', 'red', 'lawngreen', 'yellow', 'blue', 'magenta', 'cyan', 'white']
-  const gradientColours = ['lawngreen', 'cyan', 'blue', 'magenta', 'red', 'yellow']
 
   /* Background stripes */
   d3.range(8).forEach((d, i) => {
@@ -137,7 +136,6 @@ function drawFFmpegTestsrc(x, y, width, height) {
       .style("fill", "lightblue")
       .style("opacity", 0.5)
 
-
   /* Rainbow bar */
   var gradient = g.append('linearGradient')
      .attr('id', 'testsrcGrad')
@@ -146,41 +144,19 @@ function drawFFmpegTestsrc(x, y, width, height) {
      .attr('y1', '0')
      .attr('y2', '0')
 
-    // TODO: Needs refactor!!!!!
-    gradient.append('stop')
-      .attr('offset', '0%')
-      .attr('stop-color', 'lawngreen')
-      .attr('stop-opacity', 1)
-
-    gradient.append('stop')
-      .attr('offset', '17%')
-      .attr('stop-color', 'cyan')
-      .attr('stop-opacity', 1)
-
-    gradient.append('stop')
-      .attr('offset', '33%')
-      .attr('stop-color', 'blue')
-      .attr('stop-opacity', 1)
-
-    gradient.append('stop')
-      .attr('offset', '50%')
-      .attr('stop-color', 'magenta')
-      .attr('stop-opacity', 1)
-
-    gradient.append('stop')
-      .attr('offset', '66%')
-      .attr('stop-color', 'red')
-      .attr('stop-opacity', 1)
-
-    gradient.append('stop')
-      .attr('offset', '83%')
-      .attr('stop-color', 'yellow')
-      .attr('stop-opacity', 1)
-
-    gradient.append('stop')
-        .attr('offset', '100%')
-        .attr('stop-color', 'lawngreen')
-        .attr('stop-opacity', 1)
+    gradient.selectAll("stop")
+      .data([
+          {offset: "0%", colour: "lawngreen"},
+          {offset: "17%", colour: "cyan"},
+          {offset: "33%", colour: "blue"},
+          {offset: "50%", colour: "magenta"},
+          {offset: "66%", colour: "red"},
+          {offset: "83%", colour: "yellow"},
+          {offset: "100%", colour: "lawngreen"}
+        ])
+      .enter().append("stop")
+      .attr("offset", (d) => d.offset)
+      .attr("stop-color", (d) => d.colour)
 
     g.append('rect')
       .attr('x', x)
@@ -189,31 +165,14 @@ function drawFFmpegTestsrc(x, y, width, height) {
       .attr('height', height * 0.125)
       .attr('fill', 'url(#testsrcGrad)')
 
-
-
-      // const gradient = g.append('linearGradient')
-      //  .attr('id', 'testsrcGradient')
-      //  .attr('x1', '0')
-      //  .attr('x2', '1')
-      //  .attr('y1', '0')
-      //  .attr('y2', '0')
-      //
-      // gradient.selectAll('stop')
-      //  .data(gradientColours)
-      //  .enter()
-      //  .append('stop')
-      //  .style('stop-color', function(d){ return d })
-      //  .attr('offset', function(d,i){
-      //    return 100 * (i / (colors.length - 1)) + '%';
-      //  })
-
-  /* Rainbow bar (currently just grey bar) */
-  // g.append('rect')
-  //     .attr('x', x)
-  //     .attr('y', y + (height * 0.75))
-  //     .attr('width', width)
-  //     .attr('height', height * 0.125)
-  //     .attr('fill', grey40)
+  /* Black countdown square */
+  // Basic only - needs tweaking and placement adjustment
+  g.append('rect')
+      .attr('x', barWidth * 6)
+      .attr('y', height * 0.4)
+      .attr('width', barWidth * 0.8)
+      .attr('height', height * 0.2)
+      .attr('fill', 'black')
 }
 
 
