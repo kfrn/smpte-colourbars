@@ -131,24 +131,37 @@ function drawFFmpegTestsrc(x, y, width, height) {
 
   /* Circle */
 
-  g.append('pattern')
-      .attr('id', 'hash')
-      .attr('patternUnits', 'userSpaceOnUse')
-      .attr('width', 4)
-      .attr('height', 4)
-    .append('path')
-      .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
-      .attr('stroke', '#000000')
-      .attr('stroke-width', 1);
+  // const reversetestsrcColours = [...testsrcColours].reverse()
+  const n = 6
+  var color = ["#111","#222","#333","#444","#555","#666"]
 
-  g.append("circle")
-      .attr("r", height / 1.78)
-      .attr("cx", width / 2)
-      .attr("cy", height / 2)
-      .style("fill", "url(#hash)")
-      .style("opacity", 0.5)
+  const circle = g.append("circle")
+                    // .attr("r", height / 1.78) // Actual height
+                    .attr("r", height / 2)
+                    .attr("cx", width / 2)
+                    .attr("cy", height / 2)
+                    // .attr("fill", "lightblue") // This fill works
+                    .attr("fill", "none")
+                    .attr('id', 'clipper')
+
+  const clipPath = svg.append('clipPath')
+    .attr('id',"clip")
+      .append("use")
+    .attr("xlink:href","#clipper");
+
+  const rects = svg.selectAll('rect')
+      .data(d3.range(n))
+      .enter()
+      .append('rect')
+      .attr('x', function(d,i) { return i * width / n })
+      .attr('y', 0)
+      .attr('width', width/n)
+      .attr('height', 500)
+      .attr('fill', function(d,i) { return color[i]; })
+      .attr("clip-path", "url(#clip)")
 
   /* Rainbow bar */
+
   var gradient = g.append('linearGradient')
      .attr('id', 'testsrcGrad')
      .attr('x1', '0')
