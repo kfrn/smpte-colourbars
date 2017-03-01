@@ -129,41 +129,38 @@ function drawFFmpegTestsrc(x, y, width, height) {
         .attr('fill', testsrcColours[i])
   })
 
-  /* Circle */
+  /* Striped circle */
 
-  // const reversetestsrcColours = [...testsrcColours].reverse()
-  const n = 6
-  var color = ["#111","#222","#333","#444","#555","#666"]
+  const reversetestsrcColours = [...testsrcColours].reverse()
+  const n = 8
 
   const circle = g.append("circle")
-                    // .attr("r", height / 1.78) // Actual height
-                    .attr("r", height / 2)
+                    .attr("r", height / 1.78)
                     .attr("cx", width / 2)
                     .attr("cy", height / 2)
-                    // .attr("fill", "lightblue") // This fill works
                     .attr("fill", "none")
                     .attr('id', 'clipper')
 
-  const clipPath = svg.append('clipPath')
+  const clipPath = g.append('clipPath')
     .attr('id',"clip")
       .append("use")
     .attr("xlink:href","#clipper");
 
-  const rects = svg.selectAll('rect')
+  const bars = g.selectAll('bars')
       .data(d3.range(n))
       .enter()
       .append('rect')
-      .attr('x', function(d,i) { return i * width / n })
-      .attr('y', 0)
-      .attr('width', width/n)
-      .attr('height', 500)
-      .attr('fill', function(d,i) { return color[i]; })
+      .attr('x', (d, i) => i * (width / n) )
+      .attr('y', y)
+      .attr('width', width / n)
+      .attr('height', height)
+      .attr('fill', (d, i) => reversetestsrcColours[i])
       .attr("clip-path", "url(#clip)")
 
   /* Rainbow bar */
 
-  var gradient = g.append('linearGradient')
-     .attr('id', 'testsrcGrad')
+  const gradient = g.append('linearGradient')
+     .attr('id', 'rainbowGrad')
      .attr('x1', '0')
      .attr('x2', '1')
      .attr('y1', '0')
@@ -183,17 +180,19 @@ function drawFFmpegTestsrc(x, y, width, height) {
       .attr("offset", (d) => d.offset)
       .attr("stop-color", (d) => d.colour)
 
-    g.append('rect')
+    const rainbowBar = g.append('rect')
+      .attr('class', 'rainbow-bar')
       .attr('x', x)
       .attr('y', y + (height * 0.75))
       .attr('width', width)
       .attr('height', height * 0.125)
-      .attr('fill', 'url(#testsrcGrad)')
+      .attr('fill', 'url(#rainbowGrad)')
 
   /* Black counting square */
 
     // Black background
     g.append('rect')
+        .attr('class', 'black-count')
         .attr('x', width * 0.8)
         .attr('y', height * 0.4)
         .attr('width', barWidth * 0.7)
@@ -202,6 +201,7 @@ function drawFFmpegTestsrc(x, y, width, height) {
 
     // Top of '1'
     g.append('rect')
+        .attr('class', 'white-count')
         .attr('x', (width * 0.8) + (barWidth * 0.6))
         .attr('y', (height * 0.4) + (height * 0.02))
         .attr('width', barWidth * 0.1)
@@ -210,6 +210,7 @@ function drawFFmpegTestsrc(x, y, width, height) {
 
     // Bottom of '1'
     g.append('rect')
+        .attr('class', 'white-count')
         .attr('x', (width * 0.8) + (barWidth * 0.6))
         .attr('y', (height * 0.5) + (height * 0.01))
         .attr('width', barWidth * 0.1)
