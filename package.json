@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "gh-pages -d ."
+    "build": "browserify src -o bundle.js",
+    "gh-pages": "gh-pages -d ."
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
   },
   "repository": {
     "type": "git",
@@ -20,5 +26,13 @@
   "homepage": "https://github.com/kfrn/smpte-colourbars#readme",
   "devDependencies": {
     "gh-pages": "^0.12.0"
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.1.0",
+    "d3": "^4.7.0",
+    "uglifyify": "^3.0.4"
   }
 }
