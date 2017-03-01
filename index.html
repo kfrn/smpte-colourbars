@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel="stylesheet" href="./styles/normalize-min.css">
   <link rel="stylesheet" href="./styles/main.css">
-  <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
 
@@ -18,7 +17,7 @@
     </div>
 
     <div class="sd">
-      <h2>EBU colourbars (SD)</h2>
+      <h2>Basic colourbars (SD)</h2>
       <p>Standard definition video, 4:3 aspect ratio.</p>
       <p>Full size: 768x576 (‘square-pixel SD’ for 625-line/‘PAL’ video).</p>
       <svg id="ebu-cb"
@@ -44,6 +43,20 @@
       </svg>
     </div>
 
+    <div class="alt-sd">
+      <h2>ffmpeg's <code>testsrc</code></h2>
+      <p>Standard definition video, 5:4 aspect ratio.</p>
+      <p>Full size: 720x576 (square pixels).</p>
+      <svg id="testsrc"
+          version="1.1"
+          baseProfile="full"
+          viewBox="0 0 720 576"
+          preserveAspectRatio="xMinYMin meet"
+          shape-rendering="crispEdges"
+          xmlns="http://www.w3.org/2000/svg">
+      </svg>
+    </div>
+
     <div class="hd">
       <h2>SMPTE colourbars (HD)</h2>
       <p>High definition video (720p), 16:9 aspect ratio. Full size: 1280x720.</p>
@@ -63,6 +76,7 @@
 
   </div>
 
+  <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="./scripts/main.js"></script>
 
 </body>
