@@ -81,35 +81,143 @@ function drawSMPTEColourBars (x, y, width, height) {
   const PLUGEright = [Array(3).fill(semiBlack), 'black', semiBlack, '#313131', Array(3).fill(semiBlack)]
   const PLUGEcoloursRight = [].concat(...PLUGEright)
 
-  // Left hand side: blue, white, purple
-  d3.range(3).forEach((d, i) => {
-    g.append('rect')
-        .attr('x', x + d * bar6)
-        .attr('y', y + height * 0.75)
-        .attr('width', bar6)
-        .attr('height', height * 0.25)
-        .attr('fill', PLUGEcoloursLeft[i])
-  })
+    // Left hand side: blue, white, purple
+    d3.range(3).forEach((d, i) => {
+      g.append('rect')
+          .attr('x', x + d * bar6)
+          .attr('y', y + height * 0.75)
+          .attr('width', bar6)
+          .attr('height', height * 0.25)
+          .attr('fill', PLUGEcoloursLeft[i])
+    })
 
-  // Middle black block (thin)
-  const middleBlockWidth = 0.5 - (3 / 7)
-  g.append('rect')
-      .attr('x', x + (0.5 * width))
-      .attr('y', y + (height * 0.75))
-      .attr('width', width * middleBlockWidth)
-      .attr('height', height * 0.25)
-      .attr('fill', semiBlack)
-
-  // Right hand side: black/superblack/light black central block
-  d3.range(9).forEach((d, i) => {
+    // Middle black block (thin)
+    const middleBlockWidth = 0.5 - (3 / 7)
     g.append('rect')
-        .attr('x', x + (width * (4 / 7)) + (d * (width * (3 / 7)) / 9))
-        .attr('y', y + height * 0.75)
-        .attr('width', (bar7 * 3) / 9)
+        .attr('x', x + (0.5 * width))
+        .attr('y', y + (height * 0.75))
+        .attr('width', width * middleBlockWidth)
         .attr('height', height * 0.25)
-        .attr('fill', PLUGEcoloursRight[i])
+        .attr('fill', semiBlack)
+
+    // Right hand side: black/superblack/light black central block
+    d3.range(9).forEach((d, i) => {
+      g.append('rect')
+          .attr('x', x + (width * (4 / 7)) + (d * (width * (3 / 7)) / 9))
+          .attr('y', y + height * 0.75)
+          .attr('width', (bar7 * 3) / 9)
+          .attr('height', height * 0.25)
+          .attr('fill', PLUGEcoloursRight[i])
   })
 }
+
+
+function drawFFmpegTestsrc(x, y, width, height) {
+  console.log("test")
+  const svg = d3.select('#testsrc')
+  const g = svg.append('g')
+  const barWidth = width / 8
+  const testsrcColours = ['black', 'red', 'lawngreen', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+
+  /* Background stripes */
+  d3.range(8).forEach((d, i) => {
+    g.append('rect')
+        .attr('x', x + (d * barWidth))
+        .attr('y', y)
+        .attr('width', barWidth)
+        .attr('height', height)
+        .attr('fill', testsrcColours[i])
+  })
+
+  /* Striped circle */
+
+  const reversetestsrcColours = [...testsrcColours].reverse()
+  const n = 8
+
+  const circle = g.append("circle")
+                    .attr("r", height / 1.78)
+                    .attr("cx", width / 2)
+                    .attr("cy", height / 2)
+                    .attr("fill", "none")
+                    .attr('id', 'clipper')
+
+  const clipPath = g.append('clipPath')
+    .attr('id',"clip")
+      .append("use")
+    .attr("xlink:href","#clipper");
+
+  const bars = g.selectAll('bars')
+      .data(d3.range(n))
+      .enter()
+      .append('rect')
+      .attr('x', (d, i) => i * (width / n) )
+      .attr('y', y)
+      .attr('width', width / n)
+      .attr('height', height)
+      .attr('fill', (d, i) => reversetestsrcColours[i])
+      .attr("clip-path", "url(#clip)")
+
+  /* Rainbow bar */
+
+  const gradient = g.append('linearGradient')
+     .attr('id', 'rainbowGrad')
+     .attr('x1', '0')
+     .attr('x2', '1')
+     .attr('y1', '0')
+     .attr('y2', '0')
+
+    gradient.selectAll("stop")
+      .data([
+          {offset: "0%", colour: "lawngreen"},
+          {offset: "17%", colour: "cyan"},
+          {offset: "33%", colour: "blue"},
+          {offset: "50%", colour: "magenta"},
+          {offset: "66%", colour: "red"},
+          {offset: "83%", colour: "yellow"},
+          {offset: "100%", colour: "lawngreen"}
+        ])
+      .enter().append("stop")
+      .attr("offset", (d) => d.offset)
+      .attr("stop-color", (d) => d.colour)
+
+    const rainbowBar = g.append('rect')
+      .attr('class', 'rainbow-bar')
+      .attr('x', x)
+      .attr('y', y + (height * 0.75))
+      .attr('width', width)
+      .attr('height', height * 0.125)
+      .attr('fill', 'url(#rainbowGrad)')
+
+  /* Black counting square */
+
+    // Black background
+    g.append('rect')
+        .attr('class', 'black-count')
+        .attr('x', width * 0.8)
+        .attr('y', height * 0.4)
+        .attr('width', barWidth * 0.7)
+        .attr('height', height * 0.2)
+        .attr('fill', 'black')
+
+    // Top of '1'
+    g.append('rect')
+        .attr('class', 'white-count')
+        .attr('x', (width * 0.8) + (barWidth * 0.6))
+        .attr('y', (height * 0.4) + (height * 0.02))
+        .attr('width', barWidth * 0.1)
+        .attr('height', height * 0.07)
+        .attr('fill', 'white')
+
+    // Bottom of '1'
+    g.append('rect')
+        .attr('class', 'white-count')
+        .attr('x', (width * 0.8) + (barWidth * 0.6))
+        .attr('y', (height * 0.5) + (height * 0.01))
+        .attr('width', barWidth * 0.1)
+        .attr('height', height * 0.07)
+        .attr('fill', 'white')
+}
+
 
 function drawHDColourBars (x, y, width, height) {
   const svg = d3.select('#smpte-cb-hd')
@@ -197,15 +305,8 @@ function drawHDColourBars (x, y, width, height) {
 
     // Bottom ribbon, third block (gradient)
 
-      g.append('rect')
-      .attr('x', x + cornerBlock + barWidth)
-      .attr('y', y + (height * 0.7))
-      .attr('width', barWidth * 6)
-      .attr('height', height * 0.1)
-      .attr('fill', 'url(#svgGradient)')
-
       var gradient = g.append('linearGradient')
-       .attr('id', 'svgGradient')
+       .attr('id', 'hdGradient')
        .attr('x1', '0')
        .attr('x2', '1')
        .attr('y1', '0')
@@ -220,6 +321,13 @@ function drawHDColourBars (x, y, width, height) {
           .attr('offset', '100%')
           .attr('stop-color', 'white')
           .attr('stop-opacity', 1)
+
+          g.append('rect')
+          .attr('x', x + cornerBlock + barWidth)
+          .attr('y', y + (height * 0.7))
+          .attr('width', barWidth * 6)
+          .attr('height', height * 0.1)
+          .attr('fill', 'url(#hdGradient)')
 
     // Bottom ribbon, last block
     g.append('rect')
@@ -282,3 +390,4 @@ function drawHDColourBars (x, y, width, height) {
 drawEBUColourBars(0, 0, 768, 576)
 drawSMPTEColourBars(0, 0, 768, 576)
 drawHDColourBars(0, 0, 1280, 720)
+drawFFmpegTestsrc(0, 0, 720, 576)
