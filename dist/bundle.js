@@ -16744,13 +16744,15 @@ var drawEBUColourBars = require('./ebu-cb');
 var drawSMPTEColourBars = require('./smpte-cb');
 var drawFFmpegTestsrc = require('./ffmpeg-testsrc');
 var drawHDColourBars = require('./hd-cb');
+var drawPM5544 = require('./pm5544');
 
 drawEBUColourBars(0, 0, 768, 576);
 drawSMPTEColourBars(0, 0, 768, 576);
 drawFFmpegTestsrc(0, 0, 720, 576);
+drawPM5544(0, 0, 768, 576);
 drawHDColourBars(0, 0, 1280, 720);
 
-},{"./ebu-cb":2,"./ffmpeg-testsrc":3,"./hd-cb":4,"./smpte-cb":7}],6:[function(require,module,exports){
+},{"./ebu-cb":2,"./ffmpeg-testsrc":3,"./hd-cb":4,"./pm5544":7,"./smpte-cb":8}],6:[function(require,module,exports){
 'use strict';
 
 var mainColours = { // At 75% intensity
@@ -16774,6 +16776,21 @@ module.exports = {
 };
 
 },{}],7:[function(require,module,exports){
+'use strict';
+
+var d3 = require("d3");
+
+function drawPM5544(x, y, width, height) {
+  var svg = d3.select('#pm5544');
+  var g = svg.append('g');
+
+  /* Grey background */
+  g.append('rect').attr('x', x).attr('y', y).attr('width', width).attr('height', height).attr('fill', 'grey');
+}
+
+module.exports = drawPM5544;
+
+},{"d3":1}],8:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) {
@@ -16838,4 +16855,4 @@ function drawSMPTEColourBars(x, y, width, height) {
 
 module.exports = drawSMPTEColourBars;
 
-},{"./maincolours":6,"d3":1}]},{},[2,3,4,5,6,7]);
+},{"./maincolours":6,"d3":1}]},{},[2,3,4,5,6,7,8]);

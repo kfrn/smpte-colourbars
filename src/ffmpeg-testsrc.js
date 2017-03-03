@@ -1,7 +1,6 @@
 const d3 = require("d3")
 
 function drawFFmpegTestsrc(x, y, width, height) {
-  console.log("test")
   const svg = d3.select('#testsrc')
   const g = svg.append('g')
   const barWidth = width / 8
