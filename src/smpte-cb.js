@@ -4,7 +4,7 @@ const mainColours = require('./maincolours').mainColours
 
 const smpteColours = [...colourValues]
 smpteColours[0] = 'lightgrey'
-const semiBlack = '#1f1f1f'
+const semiBlack = '#0a0a0a'
 const smpteBlue = '#003d67'
 const smptePurple = '#3d0076'
 
@@ -14,7 +14,7 @@ function drawSMPTEColourBars (x, y, width, height) {
   const bar7 = width / 7
   const bar6 = width / 6
 
-  /* Standard EIA 75% amplitude white bars (67% of frame height) */
+  /* Standard EIA 75% amplitude bars (67% of frame height) */
   d3.range(7).forEach((d, i) => {
     g.append('rect')
       .attr('x', x + d * bar7)
@@ -38,7 +38,7 @@ function drawSMPTEColourBars (x, y, width, height) {
   /* PLUGE signal (25% of frame height) */
 
   const PLUGEcoloursLeft = [smpteBlue, 'white', smptePurple]
-  const PLUGEright = [Array(3).fill(semiBlack), 'black', semiBlack, '#313131', Array(3).fill(semiBlack)]
+  const PLUGEright = [Array(3).fill(semiBlack), 'black', semiBlack, '#0e0e0e', Array(3).fill(semiBlack)]
   const PLUGEcoloursRight = [].concat(...PLUGEright)
 
     // Left hand side: blue, white, purple

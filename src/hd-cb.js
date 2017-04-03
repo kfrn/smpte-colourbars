@@ -5,7 +5,7 @@ const colourValues = require('./maincolours').colourValues
 const smpteColours = [...colourValues]
 smpteColours[0] = 'lightgrey'
 
-const semiBlack = '#1f1f1f'
+const semiBlack = '#0a0a0a'
 const grey15 = '#252525'
 const grey40 = '#656565'
 const smpteBlue = '#003d67'
@@ -27,7 +27,7 @@ function drawHDColourBars (x, y, width, height) {
 
   /* TOP SECTION - 60% of HEIGHT */
 
-    // 40% grey background ()= grey sidebars in top section)
+    // 40% grey background = grey sidebars in top section)
     g.append('rect')
         .attr('x', x)
         .attr('y', y)
@@ -157,7 +157,7 @@ function drawHDColourBars (x, y, width, height) {
 
     // Sequence of five black bars
     d3.range(5).forEach((d, i) => {
-      const smpteBlacks = ['black', semiBlack, '#2f2f2f', semiBlack, '#343434']
+      const smpteBlacks = ['black', semiBlack, '#0e0e0e', semiBlack, '#111111']
       const middleSectionWidth = (width * 0.75)
       const middleLeftBlock = (middleSectionWidth / 7) * 4.5
       g.append('rect')
